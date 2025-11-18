@@ -151,7 +151,7 @@
 - name: Allow svc.sh to be run with sudo
   ansible.builtin.lineinfile:
     path: "{{ runner_dir }}/svc.sh"
-    regexp: '^if [ $user_id -eq 0 ]; then'
+    regexp: '^if \[ \$user_id -eq 0 \]; then'
     line: 'if [ $user_id -eq 1000000 ]; then'
   when: ansible_facts.system == 'Darwin'
 
