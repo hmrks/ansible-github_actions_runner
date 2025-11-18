@@ -132,6 +132,29 @@
     runner_name in registered_runners.json.runners|map(attribute='name')|list and
     reinstall_runner
 
+- name: Replace plist template (macOS)
+  ansible.builtin.copy:
+    src: "files/actions.runner.plist.template"
+    dest: "{{ runner_dir }}/bin/actions.runner.plist.template"
+    owner: "{{ runner_user }}"
+    mode: "0755"
+  when: ansible_facts.system == 'Darwin'
+
+- name: Update LAUNCH_PATH in svc.sh (macOS)
+  ansible.builtin.lineinfile:
+    path: "{{ runner_dir }}/svc.sh"
+    regexp: '^LAUNCH_PATH='
+    line: 'LAUNCH_PATH="/Library/LaunchDaemons"'
+  when: ansible_facts.system == 'Darwin'
+
+# This is a hack, if it wasn't obvious
+- name: Allow svc.sh to be run with sudo
+  ansible.builtin.lineinfile:
+    path: "{{ runner_dir }}/svc.sh"
+    regexp: '^if [ $user_id -eq 0 ]; then'
+    line: 'if [ $user_id -eq 1000000 ]; then'
+  when: ansible_facts.system == 'Darwin'
+
 - name: Install service  # noqa no-changed-when
   ansible.builtin.command: "./svc.sh install {{ runner_user }}"
   args:
