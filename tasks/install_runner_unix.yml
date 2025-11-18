@@ -161,7 +161,6 @@
     chdir: "{{ runner_dir }}"
   changed_when: true
   become: true
-  become_user: "{{ runner_user if ansible_facts.system == 'Darwin' else 'root' }}"
   when: not runner_service_file_path.stat.exists
 
 - name: Read service name from file
