@@ -142,7 +142,7 @@
 
 - name: Update .env (macOS)
   ansible.builtin.template:
-    src: templates/.env
+    src: templates/.env.j2
     dest: "{{ runner_dir }}/.env"
     owner: "{{ runner_user }}"
     mode: "0644"
