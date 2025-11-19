@@ -140,6 +140,14 @@
     mode: "0755"
   when: ansible_facts.system == 'Darwin'
 
+- name: Update .env (macOS)
+  ansible.builtin.template:
+    src: templates/.env
+    dest: "{{ runner_dir }}/.env"
+    owner: "{{ runner_user }}"
+    mode: "0644"
+  when: ansible_facts.system == 'Darwin'
+
 - name: Update LAUNCH_PATH in svc.sh (macOS)
   ansible.builtin.lineinfile:
     path: "{{ runner_dir }}/svc.sh"
