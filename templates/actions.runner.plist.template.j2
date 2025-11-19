@@ -3,21 +3,21 @@
 <plist version="1.0">
   <dict>
     <key>Label</key>
-    <string>{{SvcName}}</string>
+    <string>{{ '{{' }}SvcName{{ '}}' }}</string>
     <key>ProgramArguments</key>
     <array>
-      <string>{{RunnerRoot}}/runsvc.sh</string>
+      <string>{{ '{{' }}RunnerRoot{{ '}}' }}/runsvc.sh</string>
     </array>
     <key>UserName</key>
-    <string>{{User}}</string>
+    <string>{{ runner_user }}</string>
     <key>WorkingDirectory</key>
-    <string>{{RunnerRoot}}</string>
+    <string>{{ '{{' }}RunnerRoot{{ '}}' }}</string>
     <key>RunAtLoad</key>
     <true/>
     <key>StandardOutPath</key>
-    <string>{{UserHome}}/Library/Logs/{{SvcName}}/stdout.log</string>
+    <string>{{ '{{' }}UserHome{{ '}}' }}/Library/Logs/{{ '{{' }}SvcName{{ '}}' }}/stdout.log</string>
     <key>StandardErrorPath</key>
-    <string>{{UserHome}}/Library/Logs/{{SvcName}}/stderr.log</string>
+    <string>{{ '{{' }}UserHome{{ '}}' }}/Library/Logs/{{ '{{' }}SvcName{{ '}}' }}/stderr.log</string>
     <key>EnvironmentVariables</key>
     <dict>
       <key>ACTIONS_RUNNER_SVC</key>

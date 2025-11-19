@@ -133,8 +133,8 @@
     reinstall_runner
 
 - name: Replace plist template (macOS)
-  ansible.builtin.copy:
-    src: "files/actions.runner.plist.template"
+  ansible.builtin.template:
+    src: templates/actions.runner.plist.template.j2
     dest: "{{ runner_dir }}/bin/actions.runner.plist.template"
     owner: "{{ runner_user }}"
     mode: "0755"
